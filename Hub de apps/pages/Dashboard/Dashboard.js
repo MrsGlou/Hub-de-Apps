@@ -1,29 +1,28 @@
-import { LISTHUB } from '../../components/DashboardCard/DashboardCards';
-import './Dashboard.css'
+import { hubGames } from "../../components/DashboardCard/DashboardCards";
+import { createContent } from "../../main";
+
+import "./Dashboard.css";
 
 export const createDashboard = () => {
-    console.log(`mundo`)
+  const dashboard = document.querySelector("#app");
+  dashboard.innerHTML = `
+  <section class="hub">
+        <h2>NEOLAND HUB-GAMES</h2>
+        <ul id="listHUB">
 
-    const dashboard = document.querySelector('#app');
-    dashboard.innerHTML =
-    `<section class="hub">
-    <h2> Welcome ${localStorage.user}</h2>
+        </ul>
     </section>
-    `
-    addCard()
-}
+    `;
+  hubGames();
+  addlisteners();
+};
 
-const addCard = () => {
-    for (let clave in LISTHUB){
-        createCardsHub(clave, LISTHUB[clave])
-    }
-}
+const addlisteners = () => {
+  document
+    .querySelector("#pokeApi")
+    .addEventListener("click", () => createContent("PokeAPI"));
+    document
+    .querySelector("#whakaTopo")
+    .addEventListener("click", () => createContent("Whaka-a-Topo"));
+};
 
-const createCardsHub = (name, image) => {
-    const cardsHub = document.querySelector("#hub");
-    cardsHub.innerHTML += `
-    <figure class= "cardHub" style="background-image: url('${image}')" >
-        <h2>${name}</h2>
-    </figure>
-    `
-}

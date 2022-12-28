@@ -1,0 +1,20 @@
+.hub > h2 {
+    font-size: 24px;
+    display: flex;
+    justify-self: flex-start;
+    align-self: flex-start;
+}
+
+section > ul  {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+}
+
+.hub > ul > li {
+    text-decoration: none;
+    
+}

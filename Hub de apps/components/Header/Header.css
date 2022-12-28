@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap'); 
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+}
+.navbar{
+  padding: 1rem;
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+}
+
+button {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    border-radius: 5px;
+    border-width: 0px;
+    background-color: #f4f1e7;
+    transform: 0.2s;
+    padding: 5px;
+    transition: 0.3s ease-in-out;
+
+}
+
+button:hover {
+  transform: scale(1.1);
+}

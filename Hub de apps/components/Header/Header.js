@@ -1,24 +1,25 @@
 import { createLogin } from "../../pages/Login/Login";
+import "./Header.css";
 
 export const createHeader = () => {
   const navbar = document.querySelector("header");
   navbar.innerHTML = `
   <div class="navbar">
+    <h2>Welcome ${localStorage.user}</h2>
     <button id= "btnChangeColor">Change color</button>
-    <button id= "logout">Logout</button>
+    <button id= "logout"><i class="fa-solid fa-right-from-bracket"></i></button>
   </div>
     `;
 
-    addHeadersEvents();
-    //logout();
+  addHeadersEvents();
 };
 
-const addHeadersEvents = () => { 
+const addHeadersEvents = () => {
   const btnColor = document.querySelector("#btnChangeColor");
   btnColor.addEventListener("click", () => changeColor());
 
   const logOut = document.querySelector("#logout");
-  logOut.addEventListener('click', () => logout())
+  logOut.addEventListener("click", () => logout());
 };
 
 const changeColor = () => {
@@ -33,6 +34,11 @@ const changeColor = () => {
 };
 
 const logout = () => {
-localStorage.clear();
-createLogin();
-}
+  const localUser = document.querySelector(".navbar");
+  localStorage.clear();
+  localUser.innerHTML = `    
+  <h2>Welcome </h2>
+  <button id= "btnChangeColor">Change color</button>`
+
+  createLogin();
+};
