@@ -9,7 +9,6 @@ export const createDashboard = () => {
   <section class="hub">
         <h2>NEOLAND HUB-GAMES</h2>
         <ul id="listHUB">
-
         </ul>
     </section>
     `;

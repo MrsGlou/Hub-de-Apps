@@ -1,16 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap'); 
 
 * {
-  margin: 0;
-  padding: 0;
+  margin: 0, auto;
+  padding: 0, auto;
   box-sizing: border-box;
   font-family: Roboto, sans-serif;
 }
+
 .navbar{
-  padding: 1rem;
+  padding-top: 2rem;
   display: flex;
-  justify-content: end;
+  justify-content: space-around;
   gap: 1rem;
+  color: #a0595d;
 }
 
 button {
@@ -19,11 +21,15 @@ button {
     border-width: 0px;
     background-color: #f4f1e7;
     transform: 0.2s;
-    padding: 5px;
+    padding: 10px;
+    font-size: 15px;
     transition: 0.3s ease-in-out;
-
 }
 
 button:hover {
   transform: scale(1.1);
+}
+
+.navbar > h2 {
+  font-size: 30px;
 }

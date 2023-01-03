@@ -1,8 +1,9 @@
 .hub > h2 {
-    font-size: 24px;
+    font-size: 40px;
     display: flex;
     justify-self: flex-start;
     align-self: flex-start;
+    color: #a0595d ;
 }
 
 section > ul  {
@@ -12,9 +13,4 @@ section > ul  {
     justify-content: space-around;
     align-items: center;
     gap: 1rem;
-}
-
-.hub > ul > li {
-    text-decoration: none;
-    
 }

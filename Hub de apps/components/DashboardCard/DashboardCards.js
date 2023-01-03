@@ -1,3 +1,5 @@
+import './DashboardCards.css'
+
 export const hubGames = () => {
   const listHUB = document.querySelector("#listHUB");
   listHUB.innerHTML = `

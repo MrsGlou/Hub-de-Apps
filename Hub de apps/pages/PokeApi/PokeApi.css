@@ -1,0 +1,76 @@
+.poke-api {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#pokemon-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  margin: 20px;
+  gap: 2rem;
+}
+
+.pokemon-nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 30px 0 30px 0;
+}
+
+.header-container {
+    font-size: 2rem;
+}
+
+
+.search-box-container {
+	align-self: center;
+	width: 50%;
+	display: flex;
+	margin-bottom: 30px;
+}
+
+.search-box {
+	width: 100%;
+	border: none;
+	background: transparent;
+	outline: none;
+	font-size: 1.1rem;
+	font-weight: bold;
+	border-bottom: 3px solid rgb(0, 0, 0, 0.9);
+	padding-bottom: 5px;
+}
+
+.fa-search {
+	border-bottom: 3px solid rgb(0, 0, 0, 0.9);
+	color: rgb(0, 0, 0, 0.9);
+}
+
+.search-box:focus {
+	border-bottom: 3px solid limegreen;
+}
+
+.search-box:focus + .fa-search {
+	border-bottom: 3px solid limegreen;
+	color: limegreen;
+}
+
+.btn-container {
+	align-self: center;
+	margin-bottom: 15px;
+
+	display: flex;
+	align-items: center;
+}
+
+.btn-container button i {
+	pointer-events: none;
+}
+

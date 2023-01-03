@@ -1,0 +1,91 @@
+.pokemon-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  
+  position: relative;
+  height: 300px;
+  width: 185px;
+
+  box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+  border-radius: 20px;
+
+  transition: transform 1.5s;
+  transform-style: preserve-3d;
+}
+.pokemon-container:hover .pokemon-card {
+  transform: rotateY(0.5turn);
+  cursor: pointer;
+}
+
+.card-front {
+  z-index: -2;
+
+}
+
+.card-back,
+.card-front {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+  border-radius: 20px;
+  border: 4px solid #fff;
+  backface-visibility: hidden;
+}
+
+.card-back {
+	transform: rotateY(0.5turn);
+	background-color: #464646;
+	color: white;
+	border: 4px solid #464646;
+}
+
+img {
+  width: 70%;
+  align-self: center;
+}
+
+.circle {
+  padding: 65px;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  top: 17%;
+  z-index: -1;
+}
+
+.poke-name {
+	font-weight: bold;
+	text-align: center;
+}
+
+.poke-id {
+	margin-top: 10px;
+	border-radius: 20px;
+	padding: 3px 10px;
+	font-size: 1.1rem;
+	background: rgba(0, 0, 0, 0.2);
+
+}
+
+.poke-stats-name {
+	font-weight: bold;
+	font-size: 0.8rem;
+}
+
+.poke-stats-bar {
+	width: 70%;
+	height: 8px;
+	margin-bottom: 15px;
+  border: 1px solid black;
+}

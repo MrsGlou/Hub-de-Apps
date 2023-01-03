@@ -1,73 +1,175 @@
 import "./WhakaTopo.css";
 
-export const createWhakaTopo = () => {
-  const whakaTopo = document.querySelector("#app");
-  whakaTopo.innerHTML = `
-    <div class="container">
-        <h2>Tiempo restante:</h2>
-        <h3 id="time-left">30</h3>
-        <h2>Puntuación:</h2>
-        <h3 id="score">0</h3>
-    <div class="grid" id="square-container"></div>
-    </div>
+const totalSquares = 9;
+const states = {
+    starting: "starting",
+    running: "running",
+    paused: "paused",
+    finished: "finished",
+};
+var currentState = states.starting;
+var timeLeft = 30;
+var score = 0;
+var squareCatId;
+var intervalTime;
+var intervalCat;
+
+
+
+export const whakaTopo = () => {
+    drawGrid();
+}
+
+//Dibuja una vez la plantilla y añade los listeners
+const drawGrid = () => {
+    const whakaTopo = document.querySelector("#app");
+    whakaTopo.innerHTML = `
+        <div class="container">
+            <h2>Tiempo restante:</h2>
+            <h3 id="time-left">${timeLeft}</h3>
+            <h2>Puntuación:</h2>
+            <h3 id="scoreboard">${score}</h3>
+            <button id="start">Start</button>
+            <button id="pause">Pause</button>
+            <button id="restart">Restart</button>
+            <div class="grid" id="square-container"></div>
+        </div>
     `;
-  const container = document.querySelector("#square-container");
-  for (let i = 0; i < 9; i++) {
-    container.innerHTML += `
-        <div class="square" id="${i}"></div>
-        `;
-  }
-  startGame();
-};
+    
+    const container = document.querySelector("#square-container");
+    for (let i = 0; i < totalSquares; i++) {
+        const square = `<div class="square" id="${i}"></div>`;
+        container.innerHTML += square;
+    }
 
-const moveCat = () => {
-  let timerId = 0;
-  timerId = setInterval(getRandomSquare, 500);
-};
+    for (let i = 0; i < totalSquares; i++) {
+        const square = document.getElementById(i);
+        square.addEventListener('click', checkHit);
+    }
 
-const getRandomSquare = () => {
-  const squares = document.querySelectorAll(".square");
-  const score = document.querySelector("#score");
-  const cat = document.querySelector('.cat');
+    const startButton = document.getElementById("start");
+    startButton.addEventListener('click', startGame);
 
-  let positionHit;
-  let result = 0;
+    const pauseButton = document.getElementById("pause");
+    pauseButton.addEventListener('click', togglePause);
 
-  squares.forEach((square) => {
-    square.classList.remove("cat");
-  });
+    const restartButton = document.getElementById("restart");
+    restartButton.addEventListener('click', restartGame);
 
-  let randomSquare = squares[Math.floor(Math.random() * 9)];
-  randomSquare.classList.add("cat");
+}
 
-  positionHit = randomSquare.id;
+const startGame = (event) => {
 
-  squares.forEach((square) => {
-    square.addEventListener("mousedown", () => {
-      if (square.id == positionHit) {
-        result++;
-        score.textContent = result;
-        positionHit = null;
-      }
+    if (currentState === states.starting) {
+        const startButton = document.getElementById("start");
+        startButton.disabled = true;
+        currentState = states.running;
+
+        intervalCat = setInterval(drawCat, 500);
+        intervalTime = setInterval(() => {
+            timeLeft--;
+            checkTime();
+            updateTimer();
+        }, 1000);
+    }
+}
+
+//Pausa o resume el juego según el estado en el que se encuentre
+const togglePause = () => {
+
+    const pauseButton = document.getElementById("pause");
+
+    if (currentState === states.running) {
+
+        clearInterval(intervalTime);
+        clearInterval(intervalCat);
+
+        pauseButton.innerHTML = "Resume";
+        currentState = states.paused;
+
+    } else if (currentState === states.paused) {
+
+        intervalTime = setInterval(() => {
+            timeLeft--;
+            checkTime();
+            updateTimer();
+        }, 1000);
+        intervalCat = setInterval(drawCat, 500);
+
+        pauseButton.innerHTML = "Pause";
+        currentState = states.running;
+    }
+}
+
+//Resetea el juego
+const restartGame = (event) => {
+    timeLeft = 30;
+    score = 0;
+    updateTimer();
+    updateScoreboard();
+    removeCat();
+    clearInterval(intervalTime);
+    clearInterval(intervalCat);
+    currentState = states.starting;
+}
+
+
+//Elimina la clase 'cat' de todos los squares
+//y selecciona aleatoriamente un square para añadir la clase 'cat'
+const drawCat = () => {
+    let squares = document.querySelectorAll(".square");
+    squares.forEach((square) => {
+        square.classList.remove("cat");
     });
-  });
-};
 
-const count = () => {
-  const time = document.querySelector("#time-left");
-  let actualTime = 30;
+    let randomSquare = squares[Math.floor(Math.random() * 9)];
+    randomSquare.classList.add("cat");
+    squareCatId = randomSquare.id;
+}
 
-  actualTime--;
-  time.textContent = actualTime;
+//Comprueba si ha hecho 'click' en el gato
+//Si es true aumenta la puntuación
+const checkHit = (e) => {
+    if (currentState === states.running) {
+        let squareClickedId = e.target.id;
 
-  if (actualTime == 0) {
-    clearInterval(timerId);
-    clearInterval(countTimerId);
-    alert(`Se acabo el juego, tu puntuación ha sido de ${result}`);
-  }
-};
+        if (squareClickedId === squareCatId) {
+            score++;
+            updateScoreboard();
+        }
+    }
+    
+}
 
-const startGame = () => {
-  let countTimerId = setInterval(count, 1000);
-  moveCat();
-};
+//Elimina la clase 'cat'
+const removeCat = () => {
+    let squares = document.getElementsByClassName("square");
+
+    for (let square of squares) {
+        square.classList.remove("cat");
+        console.log(square);
+    }
+    
+}
+
+//Si el tiempo llega a 0 se para el juego
+const checkTime = () => {
+    if (timeLeft <= 0) {
+        clearInterval(intervalTime);
+        clearInterval(intervalCat);
+        currentState = states.finished;
+        removeCat();
+    }
+}
+
+//Actualiza el timer
+const updateTimer = () => {
+    let timer = document.getElementById("time-left");
+    timer.innerHTML = timeLeft; 
+}
+
+//Actualiza el marcador
+const updateScoreboard = () => {
+    let scoreboard = document.getElementById("scoreboard");
+    scoreboard.innerHTML = score; 
+}

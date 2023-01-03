@@ -1,3 +1,4 @@
+import { createContent } from "../../main";
 import { createLogin } from "../../pages/Login/Login";
 import "./Header.css";
 
@@ -39,6 +40,6 @@ const logout = () => {
   localUser.innerHTML = `    
   <h2>Welcome </h2>
   <button id= "btnChangeColor">Change color</button>`
-
+  addHeadersEvents();
   createLogin();
 };
