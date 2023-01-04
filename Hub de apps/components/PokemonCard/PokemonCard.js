@@ -21,59 +21,57 @@ const colors = {
   dark: "#a9abb0",
 };
 
-export const pokemonCard = (mappedPokemon) => {
+export const pokemonCard = (pokemonList) => {
   const pokemoncard = document.querySelector("#pokemon-cards-container");
-  for (const pokemon of mappedPokemon) {
+  for (const pokemon of pokemonList) {
     pokemoncard.innerHTML += `
       <figure class = "pokemon-container">
-      <div class="pokemon-card">
-      <div class="card-front">
-        <h4 class="poke-name">${
-          pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
-        }</h4>
-        <img src=${pokemon.image}></img>
-        <div class="circle"></div>
-        <h5 class="poke-id"> #${pokemon.id} </h5>
-        <h5 class= "poke-weight">Weight: ${pokemon.weight}kg</h5>
-        <h5 class= "poke-height"> Height: ${pokemon.height}m</h5>
-        <h5 class= "poke-types">${pokemon.types}</h5>
-        <div id= "poke-info"></div>
-      </div>
-      <div class="card-back">
-      <h5 class= "poke-stats-name">HP: ${pokemon.HP}</h5>
-      <div class="poke-stats-bar" style="background: linear-gradient(to right, #c2f3ff ${
-        pokemon.HP
-      }% , #f0e09c ${pokemon.HP}%"
-      ></div>
-      <h5 class= "poke-stats-name">Attack: ${pokemon.attack}</h5>
-      <div class="poke-stats-bar" style="background: linear-gradient(to right, #c2f3ff ${
-        pokemon.attack
-      }% , #f0e09c ${pokemon.attack}%"
-      ></div>
-      <h5 class= "poke-stats-name">Defense:${pokemon.defense}</h5>
-      <div class="poke-stats-bar" style="background: linear-gradient(to right, #c2f3ff ${
-        pokemon.defense
-      }% , #f0e09c ${pokemon.defense}%"
-      ></div>
-      <h5 class= "poke-stats-name">Special Attack:${pokemon.specialAttack}</h5>
-      <div class="poke-stats-bar" style="background: linear-gradient(to right, #c2f3ff ${
-        pokemon.specialAttack
-      }% , #f0e09c ${pokemon.specialAttack}%"
-      ></div>
-      <h5 class= "poke-stats-name">Special Defense:${
-        pokemon.specialDefense
-      }</h5>
-      <div class="poke-stats-bar" style="background: linear-gradient(to right, #c2f3ff ${
-        pokemon.specialDefense
-      }% , #f0e09c ${pokemon.specialDefense}%"
-      ></div>
-      <h5 class= "poke-stats-name">Speed:${pokemon.speed}</h5>
-      <div class="poke-stats-bar" style="background: linear-gradient(to right, #c2f3ff ${
-        pokemon.speed
-      }% , #f0e09c ${pokemon.speed}%"
-      ></div>
-      </div>
-      </div>
+        <div class="pokemon-card">
+          <div class="card-front" style = "background: ${colors[pokemon.pkmtype1]}">
+            <h4 class="poke-name">${
+              pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
+            }</h4>
+            <img src=${pokemon.image}></img>
+            <div class="circle"></div>
+            <h5 class="poke-id"> #${pokemon.id} </h5>
+            <h5 class= "poke-weight">Weight: ${pokemon.weight}kg</h5>
+            <h5 class= "poke-height"> Height: ${pokemon.height}m</h5>
+            <h5 class= "poke-types">${pokemon.pkmtype1.charAt(0).toUpperCase() + pokemon.pkmtype1.slice(1)}</h5>
+            <h5 class= "poke-genera"> Species: ${pokemon.genera}</h5>
+          </div>
+          <div class="card-back">
+            <h5 class= "poke-stats-name">HP: ${pokemon.HP}</h5>
+            <div class="poke-stats-bar" style="background: linear-gradient(to right, ${colors[pokemon.type1]} ${pokemon.HP}% , ${colors[pokemon.type1]}71 ${pokemon.HP}%"
+            ></div>
+            <h5 class= "poke-stats-name">Attack: ${pokemon.attack}</h5>
+            <div class="poke-stats-bar" style="background: linear-gradient(to right, #c2f3ff ${
+            pokemon.attack
+            }% , #f0e09c ${pokemon.attack}%"
+            ></div>
+            <h5 class= "poke-stats-name">Defense:${pokemon.defense}</h5>
+            <div class="poke-stats-bar" style="background: linear-gradient(to right, #c2f3ff ${
+            pokemon.defense
+            }% , #f0e09c ${pokemon.defense}%"
+            ></div>
+            <h5 class= "poke-stats-name">Special Attack:${pokemon.specialAttack}</h5>
+            <div class="poke-stats-bar" style="background: linear-gradient(to right, #c2f3ff ${
+            pokemon.specialAttack
+            }% , #f0e09c ${pokemon.specialAttack}%"
+            ></div>
+            <h5 class= "poke-stats-name">Special Defense:${
+            pokemon.specialDefense
+            }</h5>
+            <div class="poke-stats-bar" style="background: linear-gradient(to right, #c2f3ff ${
+              pokemon.specialDefense
+            }% , #f0e09c ${pokemon.specialDefense}%"
+            ></div>
+            <h5 class= "poke-stats-name">Speed:${pokemon.speed}</h5>
+            <div class="poke-stats-bar" style="background: linear-gradient(to right, #c2f3ff ${
+              pokemon.speed
+            }% , #f0e09c ${pokemon.speed}%"
+            ></div>
+          </div>
+        </div>
       </figure>
     `;
   }
@@ -81,9 +79,7 @@ export const pokemonCard = (mappedPokemon) => {
 
 export const pokemonInfo = (mappedSpecies) => {
   const pokemoninfo = document.querySelector("#poke-info");
-  for (const species of mappedSpecies) {
-    pokemoninfo.innerHTML += `
-    <h5 class= "poke-habitat">${species.habitat}</h5>
-    `
-  }
-  }
+  pokemoninfo.innerHTML += `
+    <h5 class= "poke-habitat">${mappedSpecies.habitat}</h5>
+    `;
+};

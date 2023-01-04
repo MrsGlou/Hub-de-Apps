@@ -40,6 +40,5 @@ const logout = () => {
   localUser.innerHTML = `    
   <h2>Welcome </h2>
   <button id= "btnChangeColor">Change color</button>`
-  addHeadersEvents();
-  createLogin();
+  createContent();
 };
