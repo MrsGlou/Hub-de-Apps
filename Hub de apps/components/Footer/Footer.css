@@ -2,5 +2,6 @@
     margin: auto;
     display: flex;
     justify-content: space-around;
+    align-items: flex-start;
     position: relative;
 }

@@ -27,59 +27,74 @@ export const pokemonCard = (pokemonList) => {
     pokemoncard.innerHTML += `
       <figure class = "pokemon-container">
         <div class="pokemon-card">
-          <div class="card-front" style = "background: ${colors[pokemon.pkmtype1]}">
+          <div class="card-front" style = "background: linear-gradient (to down, ${
+            colors[pokemon.pkmType[0]]
+          } 50% , ${colors[pokemon.pkmType[1]]} 50% )">
             <h4 class="poke-name">${
               pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
             }</h4>
+            <h5 class= "poke-genera">${pokemon.genera}</h5>
             <img src=${pokemon.image}></img>
             <div class="circle"></div>
             <h5 class="poke-id"> #${pokemon.id} </h5>
-            <h5 class= "poke-weight">Weight: ${pokemon.weight}kg</h5>
-            <h5 class= "poke-height"> Height: ${pokemon.height}m</h5>
-            <h5 class= "poke-types">${pokemon.pkmtype1.charAt(0).toUpperCase() + pokemon.pkmtype1.slice(1)}</h5>
-            <h5 class= "poke-genera"> Species: ${pokemon.genera}</h5>
+            <h5 class= "poke-types">${pokemon.pkmType}</h5>
+            <h6 class= "poke wh">Weight: ${pokemon.weight}kg - Height: ${
+      pokemon.height
+    }m</h6>
+            <h6 class= "poke habitat"> Habitat: ${
+              pokemon.habitat.charAt(0).toUpperCase() + pokemon.habitat.slice(1)
+            }</h6>
+            <h6 class= "poke capture"> Capture Rate: ${pokemon.captureRate}</h6>
+            <h6 class= "poke flavorText"> ${pokemon.flavorText}</h6>
           </div>
           <div class="card-back">
             <h5 class= "poke-stats-name">HP: ${pokemon.HP}</h5>
-            <div class="poke-stats-bar" style="background: linear-gradient(to right, ${colors[pokemon.type1]} ${pokemon.HP}% , ${colors[pokemon.type1]}71 ${pokemon.HP}%"
+            <div class="poke-stats-bar" style="background: linear-gradient(to right, ${
+              colors[pokemon.pkmType[0]]
+            } ${pokemon.HP}% , ${colors[pokemon.pkmType[0]]}70 ${pokemon.HP}%"
             ></div>
             <h5 class= "poke-stats-name">Attack: ${pokemon.attack}</h5>
-            <div class="poke-stats-bar" style="background: linear-gradient(to right, #c2f3ff ${
-            pokemon.attack
-            }% , #f0e09c ${pokemon.attack}%"
+            <div class="poke-stats-bar" style="background: linear-gradient(to right, ${
+              colors[pokemon.pkmType[0]]
+            } ${pokemon.attack}% , ${colors[pokemon.pkmType[0]]}70 ${
+      pokemon.attack
+    }%"
             ></div>
             <h5 class= "poke-stats-name">Defense:${pokemon.defense}</h5>
-            <div class="poke-stats-bar" style="background: linear-gradient(to right, #c2f3ff ${
-            pokemon.defense
-            }% , #f0e09c ${pokemon.defense}%"
+            <div class="poke-stats-bar" style="background: linear-gradient(to right, ${
+              colors[pokemon.pkmType[0]]
+            } ${pokemon.defense}% , ${colors[pokemon.pkmType[0]]}70 ${
+      pokemon.defense
+    }%"
             ></div>
-            <h5 class= "poke-stats-name">Special Attack:${pokemon.specialAttack}</h5>
-            <div class="poke-stats-bar" style="background: linear-gradient(to right, #c2f3ff ${
-            pokemon.specialAttack
-            }% , #f0e09c ${pokemon.specialAttack}%"
+            <h5 class= "poke-stats-name">Special Attack:${
+              pokemon.specialAttack
+            }</h5>
+            <div class="poke-stats-bar" style="background: linear-gradient(to right, ${
+              colors[pokemon.pkmType[0]]
+            } ${pokemon.specialAttack}% , ${colors[pokemon.pkmType[0]]}70 ${
+      pokemon.specialAttack
+    }%"
             ></div>
             <h5 class= "poke-stats-name">Special Defense:${
-            pokemon.specialDefense
-            }</h5>
-            <div class="poke-stats-bar" style="background: linear-gradient(to right, #c2f3ff ${
               pokemon.specialDefense
-            }% , #f0e09c ${pokemon.specialDefense}%"
+            }</h5>
+            <div class="poke-stats-bar" style="background: linear-gradient(to right, ${
+              colors[pokemon.pkmType[0]]
+            } ${pokemon.specialDefense}% , ${colors[pokemon.pkmType[0]]}70 ${
+      pokemon.specialDefense
+    }%"
             ></div>
             <h5 class= "poke-stats-name">Speed:${pokemon.speed}</h5>
-            <div class="poke-stats-bar" style="background: linear-gradient(to right, #c2f3ff ${
-              pokemon.speed
-            }% , #f0e09c ${pokemon.speed}%"
+            <div class="poke-stats-bar" style="background: linear-gradient(to right, ${
+              colors[pokemon.pkmType[0]]
+            } ${pokemon.speed}% , ${colors[pokemon.pkmType[0]]}70 ${
+      pokemon.speed
+    }%"
             ></div>
           </div>
         </div>
       </figure>
     `;
   }
-};
-
-export const pokemonInfo = (mappedSpecies) => {
-  const pokemoninfo = document.querySelector("#poke-info");
-  pokemoninfo.innerHTML += `
-    <h5 class= "poke-habitat">${mappedSpecies.habitat}</h5>
-    `;
 };
