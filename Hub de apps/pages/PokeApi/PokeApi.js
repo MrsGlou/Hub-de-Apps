@@ -67,6 +67,8 @@ const drawPokeApi = () => {
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", handleRegionButtons);
   }
+
+  document.querySelector(".search-box").addEventListener("input", handleSearchBox)
 };
 
 const handleRegionButtons = (e) => {
@@ -86,34 +88,32 @@ const toggleButton = (id) => {
 
 const drawPokemons = async () => {
   document.querySelector("#pokemon-cards-container").replaceChildren();
-  console.log(selectedRegion)
 
   await getPokemonsByRegion(selectedRegion).then((result) => {
     pokemons = result;
     pokemonCard(pokemons);
   });
 };
-/*
+
 //Buscador de pkm por nombre
-const searchBoxListener = () => {
-  const searchBox = document.querySelector(".search-box");
-  const pokemons = document.querySelectorAll(".pokemon-card .poke-name");
+const handleSearchBox = (e) => {
+  const pokemons = document.querySelectorAll(".pokemon-container");
   //Busca cada vez que introducimos una letra nueva
-  searchBox.addEventListener("keyup", (pokemon) => {
-    const inpName = searchBox.value.toLowerCase();
+    const inpName = e.target.value.toLowerCase();
     pokemons.forEach((pokemon) => {
-      const name = pokemon.textContent.toLowerCase();
-      if (name.indexOf(inpName) !== -1) {
-        pokemon.remove();
+      let pokemonName = pokemon.querySelector(".poke-name").innerHTML.toLowerCase();
+      if (pokemonName.includes(inpName)) {
+        pokemon.style.display = "inline";
+      } else {
+        pokemon.style.display = "none";
       }
     });
-  });
-};
+  };
 
 const pkmTypeListener = () => {
   const pkmTypes = document.querySelectorAll(".type");
-  const pokemons = document.querySelectorAll(".pokemon-card .poke-types");
+  const pokemons = document.querySelectorAll(".pokemon-card");
   for (let type of pkmTypes) {
     pkmtype.addEventListener("click", (type) => {});
   }
-};*/
+};

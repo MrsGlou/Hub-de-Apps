@@ -25,11 +25,9 @@ export const pokemonCard = (pokemonList) => {
   const pokemoncard = document.querySelector("#pokemon-cards-container");
   for (const pokemon of pokemonList) {
     pokemoncard.innerHTML += `
-      <figure class = "pokemon-container">
+      <figure class= "pokemon-container">
         <div class="pokemon-card">
-          <div class="card-front" style = "background: linear-gradient (to down, ${
-            colors[pokemon.pkmType[0]]
-          } 50% , ${colors[pokemon.pkmType[1]]} 50% )">
+          <div class="card-front">
             <h4 class="poke-name">${
               pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
             }</h4>
@@ -41,9 +39,8 @@ export const pokemonCard = (pokemonList) => {
             <h6 class= "poke wh">Weight: ${pokemon.weight}kg - Height: ${
       pokemon.height
     }m</h6>
-            <h6 class= "poke habitat"> Habitat: ${
-              pokemon.habitat.charAt(0).toUpperCase() + pokemon.habitat.slice(1)
-            }</h6>
+            <h6 class= "poke habitat"> Base Happiness: ${
+              pokemon.baseHappiness}</h6>
             <h6 class= "poke capture"> Capture Rate: ${pokemon.captureRate}</h6>
             <h6 class= "poke flavorText"> ${pokemon.flavorText}</h6>
           </div>
@@ -96,5 +93,13 @@ export const pokemonCard = (pokemonList) => {
         </div>
       </figure>
     `;
+   const pkmCards = document.querySelectorAll(".card-front");
+    const pkmCard = pkmCards[pkmCards.length - 1];
+    if (pokemon.pkmType[1]) {
+      pkmCard.style.background = `linear-gradient(145deg, ${colors[pokemon.pkmType[0]]} 50%, ${colors[pokemon.pkmType[1]]} 50%)`;
+    } else {
+      pkmCard.style.background = colors[pokemon.pkmType[0]];
+    }
   }
 };
+

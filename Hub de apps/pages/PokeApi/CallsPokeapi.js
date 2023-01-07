@@ -22,7 +22,7 @@ export const getPokemonsByRegion = async (selectedRegion) => {
       captureRate: moreData.captureRate,
       flavorText: moreData.flavorText,
       genera: moreData.genera,
-      habitat: moreData.habitat,
+      baseHappiness: moreData.baseHappiness,
     };
 
     data.types.forEach((item) => {
@@ -41,10 +41,17 @@ const getPokemonSpeciesById = async (id) => {
 
   let newData = {
     captureRate: data.capture_rate,
-    flavorText: data.flavor_text_entries[34].flavor_text,
+    flavorText: "", //data.flavor_text_entries[34].flavor_text,
     genera: data.genera[5].genus,
-    habitat: data.habitat.name,
+    baseHappiness: data.base_happiness,
   };
+
+  data.flavor_text_entries.forEach((item)=>{
+    if(item.language.name === "es"){
+    newData.flavorText= item.flavor_text;
+    }
+  })
+  console.log(newData.flavorText)
 
   return newData;
 };
