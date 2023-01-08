@@ -9,6 +9,7 @@ const regions = {
   sinnoh: [387, 493],
   unova: [494, 649],
   kalos: [650, 809],
+  galar: [809,905],
 };
 
 let selectedRegion = regions.kanto;
@@ -34,27 +35,28 @@ const drawPokeApi = () => {
                   <button class= "region-button" id="sinnoh">Sinnoh</button>
                   <button class= "region-button" id="unova">Unova</button>
                   <button class= "region-button" id="kalos">Kalos</button>
-              </div>
+                  <button class= "region-button" id="galar">Galar</button>
+                  </div>
             <input type="text" class="search-box" placeholder="search pokemon"></input>
             <ul class="pkm-type">
-              <li><button class="type dark"><img src="./public/Pokémon_Dark_Type_Icon.svg"/></button></li>
-              <li><button class="type electric"><img src="./public/Pokémon_Electric_Type_Icon.svg"/></button></li>
-              <li><button class="type fairy"><img src="./public/Pokémon_Fairy_Type_Icon.svg"/></button></li>
-              <li><button class="type fighting"><img src="./public/Pokémon_Fighting_Type_Icon.svg"/></button></li>
-              <li><button class="type ground"><img src="./public/Pokémon_Ground_Type_Icon.svg"/></button></li>
-              <li><button class="type ice"><img src="./public/Pokémon_Ice_Type_Icon.svg"/></button></li>
-              <li><button class="type normal"><img src="./public/Pokémon_Normal_Type_Icon.svg"/></button></li>
-              <li><button class="type poison"><img src="./public/Pokémon_Poison_Type_Icon.svg"/></button></li>
-              <li><button class="type steel"><img src="./public/Pokémon_Steel_Type_Icon.svg"/></button></li>
-              <li><button class="type water"><img src="./public/Pokémon_Water_Type_Icon.svg"/></button></li>
-              <li><button class="type psychic"><img src="./public/Pokémon_Psychic_Type_Icon.svg"/></button></li>
-              <li><button class="type rock"><img src="./public/Pokémon_Rock_Type_Icon.svg"/></button></li>
-              <li><button class="type bug"><img src="./public/tipobicho.png"/></button></li>
-              <li><button class="type dragon"><img src="./public/tipodragon.png"/></button></li>
-              <li><button class="type ghost"><img src="./public/tipofantasma.png"/></button></li>
-              <li><button class="type fire"><img src="./public/tipofuego.png"/></button></li>
-              <li><button class="type grass"><img src="./public/tipoplanta.png"/></button></li>
-              <li><button class="type fly"><img src="./public/tipovolador (2).png"/></button></li>
+              <li><button class="type" id= "dark"><img src="./public/Pokémon_Dark_Type_Icon.svg"/></button></li>
+              <li><button class="type" id= "electric"><img src="./public/Pokémon_Electric_Type_Icon.svg"/></button></li>
+              <li><button class="type" id= "fairy"><img src="./public/Pokémon_Fairy_Type_Icon.svg"/></button></li>
+              <li><button class="type" id= "fighting"><img src="./public/Pokémon_Fighting_Type_Icon.svg"/></button></li>
+              <li><button class="type" id= "ground"><img src="./public/Pokémon_Ground_Type_Icon.svg"/></button></li>
+              <li><button class="type" id= "ice"><img src="./public/Pokémon_Ice_Type_Icon.svg"/></button></li>
+              <li><button class="type" id= "normal"><img src="./public/Pokémon_Normal_Type_Icon.svg"/></button></li>
+              <li><button class="type" id= "poison"><img src="./public/Pokémon_Poison_Type_Icon.svg"/></button></li>
+              <li><button class="type" id= "steel"><img src="./public/Pokémon_Steel_Type_Icon.svg"/></button></li>
+              <li><button class="type" id= "water"><img src="./public/Pokémon_Water_Type_Icon.svg"/></button></li>
+              <li><button class="type" id= "psychic"><img src="./public/Pokémon_Psychic_Type_Icon.svg"/></button></li>
+              <li><button class="type" id= "rock"><img src="./public/Pokémon_Rock_Type_Icon.svg"/></button></li>
+              <li><button class="type" id= "bug"><img src="./public/tipobicho.png"/></button></li>
+              <li><button class="type" id= "dragon"><img src="./public/tipodragon.png"/></button></li>
+              <li><button class="type" id= "ghost"><img src="./public/tipofantasma.png"/></button></li>
+              <li><button class="type" id= "fire"><img src="./public/tipofuego.png"/></button></li>
+              <li><button class="type" id= "grass"><img src="./public/tipoplanta.png"/></button></li>
+              <li><button class="type" id= "fly"><img src="./public/tipovolador (2).png"/></button></li>
             </ul>
           </div>
       </nav>
@@ -112,8 +114,10 @@ const handleSearchBox = (e) => {
 
 const pkmTypeListener = () => {
   const pkmTypes = document.querySelectorAll(".type");
-  const pokemons = document.querySelectorAll(".pokemon-card");
+  const pokemons = document.querySelectorAll(".pokemon-container");
   for (let type of pkmTypes) {
-    pkmtype.addEventListener("click", (type) => {});
+    pkmtype.addEventListener("click", (type) => {
+      
+    });
   }
 };
