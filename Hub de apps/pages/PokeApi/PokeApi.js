@@ -9,7 +9,7 @@ const regions = {
   sinnoh: [387, 493],
   unova: [494, 649],
   kalos: [650, 809],
-  galar: [809,905],
+  galar: [810,898],
 };
 
 let selectedRegion = regions.kanto;
@@ -71,6 +71,12 @@ const drawPokeApi = () => {
   }
 
   document.querySelector(".search-box").addEventListener("input", handleSearchBox)
+
+  let typeButtons = document.querySelectorAll(".type");
+
+  for (let i = 0; i < typeButtons.length; i++) {
+    typeButtons[i].addEventListener("click", handleTypeButtons)
+  };
 };
 
 const handleRegionButtons = (e) => {
@@ -112,12 +118,17 @@ const handleSearchBox = (e) => {
     });
   };
 
-const pkmTypeListener = () => {
-  const pkmTypes = document.querySelectorAll(".type");
+const handleTypeButtons = (e) => {
+
+  //const typeButton = document.querySelectorAll(".type");
   const pokemons = document.querySelectorAll(".pokemon-container");
-  for (let type of pkmTypes) {
-    pkmtype.addEventListener("click", (type) => {
-      
-    });
-  }
+  let type =  e.target.id;
+  pokemons.forEach((pokemon) => {
+    let pokemonType = pokemon.querySelectorAll(".poke-types")
+    if (pokemonType === type ){
+    pokemon.style.display= "inline";
+    }else{
+      pokemon.style.display = "none";
+    }
+  });
 };

@@ -23,7 +23,9 @@ const colors = {
 
 export const pokemonCard = (pokemonList) => {
   const pokemoncard = document.querySelector("#pokemon-cards-container");
+  pokemoncard.innerHTML = "";
   for (const pokemon of pokemonList) {
+
     pokemoncard.innerHTML += `
       <figure class= "pokemon-container">
         <div class="pokemon-card">
@@ -35,7 +37,7 @@ export const pokemonCard = (pokemonList) => {
             <img src=${pokemon.image}></img>
             <div class="circle"></div>
             <h5 class="poke-id"> #${pokemon.id} </h5>
-            <h5 class= "poke-types">${pokemon.pkmType}</h5>
+            <h5 class= "poke-types">${pokemon.pkmType.join(" / ").replace(/\b\w/g, (ch) => ch.toUpperCase())}</h5>
             <h6 class= "poke wh">Weight: ${pokemon.weight}kg - Height: ${
       pokemon.height
     }m</h6>

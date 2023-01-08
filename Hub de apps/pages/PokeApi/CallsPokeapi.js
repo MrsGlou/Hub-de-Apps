@@ -1,5 +1,9 @@
+import { loadingPokeball } from "../../components/Loading/LoadingPokeApi";
+
 export const getPokemonsByRegion = async (selectedRegion) => {
   let pokemonList = [];
+  const loading= document.querySelector("#pokemon-cards-container")
+  loading.innerHTML = loadingPokeball();
 
   for (let id = selectedRegion[0]; id <= selectedRegion[1]; id++) {
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -51,7 +55,6 @@ const getPokemonSpeciesById = async (id) => {
     newData.flavorText= item.flavor_text;
     }
   })
-  console.log(newData.flavorText)
 
   return newData;
 };
