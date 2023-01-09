@@ -97,6 +97,7 @@ const togglePause = () => {
 const restartGame = (event) => {
     const startButton = document.getElementById("start");
     startButton.disabled = false;
+    alert("Se acabo el juego! tu puntuacion fue de: " + score);
   timeLeft = 30;
   score = 0;
   updateTimer();
@@ -149,6 +150,7 @@ const checkTime = () => {
     clearInterval(intervalTime);
     clearInterval(intervalCat);
     currentState = states.finished;
+    alert("Se acabo el juego! tu puntuacion fue de: " + score);
     removeCat();
   }
 };

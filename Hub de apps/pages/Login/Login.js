@@ -9,7 +9,7 @@ export const createLogin = () => {
         <h1>NEOLAND HUB-GAMES</h1>
         <h3>Introduce tu nombre</h3>
         <input type="text" id="userName" placeholder="name"/>
-        <button type="button" id="loginBtn"><i class="fa-solid fa-right-to-bracket"></i></button>
+        <button type="button" id="loginBtn">Continuar <i class="fa-solid fa-right-to-bracket"></i></button>
     </div>
     `
     saveUser();

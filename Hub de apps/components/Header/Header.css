@@ -33,9 +33,3 @@ button:hover {
 .navbar > h2 {
   font-size: 30px;
 }
-
-body{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  }

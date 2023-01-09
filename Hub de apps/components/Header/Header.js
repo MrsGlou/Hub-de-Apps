@@ -1,5 +1,5 @@
 import { createContent } from "../../main";
-import { createLogin } from "../../pages/Login/Login";
+import { createDashboard } from "../../pages/Dashboard/Dashboard";
 import "./Header.css";
 
 export const createHeader = () => {
@@ -8,6 +8,7 @@ export const createHeader = () => {
   <div class="navbar">
     <h2>Welcome ${localStorage.user}</h2>
     <button id= "btnChangeColor">Change color</button>
+    <button id="back">Back</button>
     <button id= "logout"><i class="fa-solid fa-right-from-bracket"></i></button>
   </div>
     `;
@@ -21,6 +22,9 @@ const addHeadersEvents = () => {
 
   const logOut = document.querySelector("#logout");
   logOut.addEventListener("click", () => logout());
+
+  const btnBack = document.querySelector("#back");
+  btnBack.addEventListener("click", () => createDashboard());
 };
 
 const changeColor = () => {

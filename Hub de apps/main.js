@@ -1,3 +1,4 @@
+import "./style.css"
 import { createFooter } from "./components/Footer/Footer";
 import { createHeader } from "./components/Header/Header";
 import { createDashboard } from "./pages/Dashboard/Dashboard";
@@ -24,4 +25,3 @@ export const createContent = (element) => {
 
 createHeader();
 createContent(undefined);
-createFooter();

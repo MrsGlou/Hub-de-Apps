@@ -9,7 +9,7 @@ const regions = {
   sinnoh: [387, 493],
   unova: [494, 649],
   kalos: [650, 809],
-  galar: [810,898],
+  galar: [810, 898],
 };
 
 let selectedRegion = regions.kanto;
@@ -38,7 +38,7 @@ const drawPokeApi = () => {
                   <button class= "region-button" id="galar">Galar</button>
                   </div>
             <input type="text" class="search-box" placeholder="search pokemon"></input>
-            <ul class="pkm-type">
+            <ul class="pkm-type"><h3 class= "type tittle">Tipos de Pokemon:</h3>
               <li><button class="type" id= "dark"><img src="./public/Pokémon_Dark_Type_Icon.svg"/></button></li>
               <li><button class="type" id= "electric"><img src="./public/Pokémon_Electric_Type_Icon.svg"/></button></li>
               <li><button class="type" id= "fairy"><img src="./public/Pokémon_Fairy_Type_Icon.svg"/></button></li>
@@ -58,6 +58,7 @@ const drawPokeApi = () => {
               <li><button class="type" id= "grass"><img src="./public/tipoplanta.png"/></button></li>
               <li><button class="type" id= "fly"><img src="./public/tipovolador (2).png"/></button></li>
             </ul>
+            <div id = "poke-type-name"></div>
           </div>
       </nav>
       <section id ="pokemon-cards-container"></section>
@@ -70,17 +71,21 @@ const drawPokeApi = () => {
     buttons[i].addEventListener("click", handleRegionButtons);
   }
 
-  document.querySelector(".search-box").addEventListener("input", handleSearchBox)
+  document
+    .querySelector(".search-box")
+    .addEventListener("input", handleSearchBox);
 
   let typeButtons = document.querySelectorAll(".type");
 
   for (let i = 0; i < typeButtons.length; i++) {
-    typeButtons[i].addEventListener("click", handleTypeButtons)
-  };
+    typeButtons[i].addEventListener("click", handleTypeButtons);
+  }
 };
 
 const handleRegionButtons = (e) => {
   selectedRegion = regions[e.target.id];
+  document.querySelector(".search-box").value = "";
+  document.querySelector("#poke-type-name").innerHTML = "";
   toggleButton(e.target.id);
   drawPokemons();
 };
@@ -106,28 +111,40 @@ const drawPokemons = async () => {
 //Buscador de pkm por nombre
 const handleSearchBox = (e) => {
   const pokemons = document.querySelectorAll(".pokemon-container");
+  document.querySelector("#poke-type-name").innerHTML = "";
   //Busca cada vez que introducimos una letra nueva
-    const inpName = e.target.value.toLowerCase();
-    pokemons.forEach((pokemon) => {
-      let pokemonName = pokemon.querySelector(".poke-name").innerHTML.toLowerCase();
-      if (pokemonName.includes(inpName)) {
-        pokemon.style.display = "inline";
-      } else {
-        pokemon.style.display = "none";
-      }
-    });
-  };
+  const inpName = e.target.value.toLowerCase();
+  pokemons.forEach((pokemon) => {
+    let pokemonName = pokemon
+      .querySelector(".poke-name")
+      .innerHTML.toLowerCase();
+    if (pokemonName.includes(inpName)) {
+      pokemon.style.display = "inline";
+    } else {
+      pokemon.style.display = "none";
+    }
+  });
+};
 
 const handleTypeButtons = (e) => {
+  let selectedType = e.currentTarget.id;
+  
+  filterPokemonTypes(selectedType);
+};
 
-  //const typeButton = document.querySelectorAll(".type");
+const filterPokemonTypes = (selectedType) => {
   const pokemons = document.querySelectorAll(".pokemon-container");
-  let type =  e.target.id;
+  const container = document.querySelector("#poke-type-name");
+  container.innerHTML= `<h3>${selectedType.replace(/\b\w/g, (ch) => ch.toUpperCase())}</h3>`
+  document.querySelector(".search-box").value = "";
+
   pokemons.forEach((pokemon) => {
-    let pokemonType = pokemon.querySelectorAll(".poke-types")
-    if (pokemonType === type ){
-    pokemon.style.display= "inline";
-    }else{
+    let pokemonType = pokemon
+      .querySelector(".poke-types")
+      .innerHTML.toLowerCase();
+    if (pokemonType.includes(selectedType)) {
+      pokemon.style.display = "inline";
+    } else {
       pokemon.style.display = "none";
     }
   });
