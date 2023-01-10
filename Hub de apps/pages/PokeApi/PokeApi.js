@@ -2,6 +2,7 @@ import { pokemonCard } from "../../components/PokemonCard/PokemonCard";
 import { getPokemonsByRegion } from "./CallsPokeapi";
 import "./PokeApi.css";
 
+//Regiones que vamos a pintar
 const regions = {
   kanto: [1, 151],
   johto: [152, 251],
@@ -12,15 +13,18 @@ const regions = {
   galar: [810, 898],
 };
 
+//seleccionamos una region por defecto para que cuando abramos la app pinte los pokemon
 let selectedRegion = regions.kanto;
 
 let pokemons = [];
 
+//Funcion exportable que nos va a crear la pagina
 export const createPokeApi = () => {
   drawPokeApi();
   drawPokemons();
 };
 
+//Pintamos el template del navegador de la pokeapi y damos eventos a los botones
 const drawPokeApi = () => {
   const pokeAPI = document.querySelector("#app");
   pokeAPI.innerHTML = `
@@ -65,11 +69,13 @@ const drawPokeApi = () => {
   </div>
   `;
 
+  //Creamos un bucle para que cada boton tenga la funcion asociada de cambiar de region, el buscador por nombres y el tipo 
   let buttons = document.querySelectorAll(".region-button");
 
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", handleRegionButtons);
   }
+
 
   document
     .querySelector(".search-box")
@@ -82,6 +88,7 @@ const drawPokeApi = () => {
   }
 };
 
+//Cambiamos el valor de la region seleccionada, hacemos que el resto de buscadores se pongan a cero, mandamos a pintar los pokemon
 const handleRegionButtons = (e) => {
   selectedRegion = regions[e.target.id];
   document.querySelector(".search-box").value = "";
@@ -90,6 +97,7 @@ const handleRegionButtons = (e) => {
   drawPokemons();
 };
 
+//Hacemos que el boton se habilite o no.
 const toggleButton = (id) => {
   let buttons = document.getElementsByClassName("region-button");
   for (let i = 0; i < buttons.length; i++) {
@@ -99,6 +107,7 @@ const toggleButton = (id) => {
   document.getElementById(id).disabled = true;
 };
 
+//Mandamos a la funcion asincrona los pokemon que tiene que hacer la llamada, guardamos los pokemon y los pinta
 const drawPokemons = async () => {
   document.querySelector("#pokemon-cards-container").replaceChildren();
 
@@ -108,11 +117,11 @@ const drawPokemons = async () => {
   });
 };
 
-//Buscador de pkm por nombre
+//Buscador de pokemon por nombre
 const handleSearchBox = (e) => {
   const pokemons = document.querySelectorAll(".pokemon-container");
   document.querySelector("#poke-type-name").innerHTML = "";
-  //Busca cada vez que introducimos una letra nueva
+  //Busca cada vez que introducimos una letra nueva y vuelve a pintar los pokemon cuadno borramos 
   const inpName = e.target.value.toLowerCase();
   pokemons.forEach((pokemon) => {
     let pokemonName = pokemon
@@ -126,19 +135,23 @@ const handleSearchBox = (e) => {
   });
 };
 
+//Recuperamos el id del boton de los tipos y se lo damos a la función que va a hacer  el filtro
 const handleTypeButtons = (e) => {
   let selectedType = e.currentTarget.id;
   
   filterPokemonTypes(selectedType);
 };
 
+//Pasamos el tipo de pokemon que vamos a pintar y ponemos debajo de la lista el nombre.
 const filterPokemonTypes = (selectedType) => {
   const pokemons = document.querySelectorAll(".pokemon-container");
   const container = document.querySelector("#poke-type-name");
   container.innerHTML= `<h3>${selectedType.replace(/\b\w/g, (ch) => ch.toUpperCase())}</h3>`
   document.querySelector(".search-box").value = "";
 
+//Bucle para ir mirando los tipos de pokemon y los que no son iguales los elimina.
   pokemons.forEach((pokemon) => {
+    //recuperamos el tipo de cada pokemon por medio de lo que contiene la clase .poke-type
     let pokemonType = pokemon
       .querySelector(".poke-types")
       .innerHTML.toLowerCase();

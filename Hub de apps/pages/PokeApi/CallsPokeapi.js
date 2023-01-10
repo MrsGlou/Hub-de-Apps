@@ -1,15 +1,18 @@
 import { loadingPokeball } from "../../components/Loading/LoadingPokeApi";
 
+//Hacemos la llamada a la api, al ser doble  llamada hacemos una dentro de otra, para traernos la información.
 export const getPokemonsByRegion = async (selectedRegion) => {
   let pokemonList = [];
   const loading= document.querySelector("#pokemon-cards-container")
   loading.innerHTML = loadingPokeball();
 
+//Pasamos la region que queremos pintar, desde que id a que id van
   for (let id = selectedRegion[0]; id <= selectedRegion[1]; id++) {
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
     const data = await res.json();
     const moreData = await getPokemonSpeciesById(data.id);
 
+//Nos quedamos solo con la información que necesitamos y la metemos en un objeto.
     let newPokemon = {
       name: data.name,
       image: data.sprites.other["official-artwork"].front_default,
@@ -28,17 +31,18 @@ export const getPokemonsByRegion = async (selectedRegion) => {
       genera: moreData.genera,
       baseHappiness: moreData.baseHappiness,
     };
-
+//Función para traer los dos tipos de pokemon.
     data.types.forEach((item) => {
       newPokemon.pkmType.push(item.type.name);
     });
-
+//Introducimos cada pokemon a la lista de pokemons
     pokemonList.push(newPokemon);
   }
 
   return pokemonList;
 };
 
+//Segunda llamada para traer las especies
 const getPokemonSpeciesById = async (id) => {
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
   const data = await res.json();
@@ -50,6 +54,7 @@ const getPokemonSpeciesById = async (id) => {
     baseHappiness: data.base_happiness,
   };
 
+  //Función para traer la explicación de cada pokemon en español.
   data.flavor_text_entries.forEach((item)=>{
     if(item.language.name === "es"){
     newData.flavorText= item.flavor_text;
